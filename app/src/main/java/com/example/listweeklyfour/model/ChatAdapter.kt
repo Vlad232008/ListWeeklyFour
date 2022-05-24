@@ -17,7 +17,6 @@ class ChatAdapter(private val names: List<String>, private val user: String) : R
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val message: TextView = itemView.findViewById(R.id.message)
         val user: TextView = itemView.findViewById(R.id.username)
-        val faker = Faker.instance()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -32,7 +31,7 @@ class ChatAdapter(private val names: List<String>, private val user: String) : R
             holder.message.text = names[position]
             holder.message.gravity = Gravity.START
             holder.user.text = user
-            holder.message.gravity = Gravity.START
+            holder.user.gravity = Gravity.START
             //holder.time.text = TimeManager.getCurrentTime()
         } else {
             holder.message.text = names[position]

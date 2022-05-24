@@ -21,7 +21,7 @@ class UsersService {
                 name = faker.name().name(),
                 company = faker.company().name(),
                 photo = IMAGES[it % IMAGES.size],
-                count = rand.nextInt(10)
+                count = rand.nextInt(50)
             )
         }.toMutableList()
     }

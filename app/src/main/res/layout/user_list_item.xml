@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:backgroundTint="#5DD3CF"
+        android:backgroundTint="#FF7145"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +35,7 @@
                     android:layout_weight="1"
                     android:paddingStart="10dp"
                     android:paddingBottom="5dp"
+                    android:paddingEnd="10dp"
                     android:text="TextView"
                     android:textColor="@color/black"
                     tools:ignore="RtlSymmetry" />
@@ -55,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="10dp"
                 android:paddingBottom="5dp"
+                android:paddingEnd="10dp"
                 android:text="TextView"
                 android:textSize="12sp" />
         </LinearLayout>

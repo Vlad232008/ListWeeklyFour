@@ -25,7 +25,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initRcView()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            initRcView()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+    }
 
+    private fun initRcView() {
         adapter = UsersAdapter(object : UserActionListener {
             override fun onUserMove(user: ChatData, moveBy: Int) {
                 usersService.moveUser(user, moveBy)
@@ -56,7 +63,6 @@ class MainActivity : AppCompatActivity() {
         }
         usersService.addListener(usersListener)
     }
-
     override fun onDestroy() {
         super.onDestroy()
         usersService.removeListener(usersListener)
