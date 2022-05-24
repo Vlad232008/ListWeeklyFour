@@ -18,7 +18,8 @@ class ChatActivity : AppCompatActivity() {
         initRcV()
     }
     private fun initRcV() = with(binding){
-        val adapter = ChatAdapter(fillList())
+        val user = intent.getStringExtra("username")
+        val adapter = ChatAdapter(fillList(),user!!)
         rcView.layoutManager = LinearLayoutManager(this@ChatActivity)
         rcView.adapter = adapter
     }

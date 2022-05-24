@@ -1,5 +1,6 @@
 package com.example.listweeklyfour.model
 
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,14 +8,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listweeklyfour.R
 import com.example.listweeklyfour.manage.TimeManager
+import com.github.javafaker.Faker
+import java.util.*
 
-class ChatAdapter(private val names: List<String>) : RecyclerView
+class ChatAdapter(private val names: List<String>, private val user: String) : RecyclerView
 .Adapter<ChatAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val message: TextView = itemView.findViewById(R.id.message)
         val user: TextView = itemView.findViewById(R.id.username)
-        val time:TextView = itemView.findViewById(R.id.tvTime)
+        val faker = Faker.instance()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,9 +27,20 @@ class ChatAdapter(private val names: List<String>) : RecyclerView
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.message.text = names[position]
-        holder.user.text = "кот"
-        holder.time.text = TimeManager.getCurrentTime()
+        val random = Random()
+        if (random.nextInt(2) >= 1) {
+            holder.message.text = names[position]
+            holder.message.gravity = Gravity.START
+            holder.user.text = user
+            holder.message.gravity = Gravity.START
+            //holder.time.text = TimeManager.getCurrentTime()
+        } else {
+            holder.message.text = names[position]
+            holder.message.gravity = Gravity.END
+            holder.user.text = "Я"
+            holder.user.gravity = Gravity.END
+        }
+        //holder.time.text = TimeManager.getCurrentTime()
     }
 
     override fun getItemCount() = names.size
