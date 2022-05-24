@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listweeklyfour.R
+import com.example.listweeklyfour.manage.TimeManager
 
 class ChatAdapter(private val names: List<String>) : RecyclerView
 .Adapter<ChatAdapter.MyViewHolder>() {
@@ -13,6 +14,7 @@ class ChatAdapter(private val names: List<String>) : RecyclerView
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val message: TextView = itemView.findViewById(R.id.message)
         val user: TextView = itemView.findViewById(R.id.username)
+        val time:TextView = itemView.findViewById(R.id.tvTime)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,6 +26,7 @@ class ChatAdapter(private val names: List<String>) : RecyclerView
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.message.text = names[position]
         holder.user.text = "кот"
+        holder.time.text = TimeManager.getCurrentTime()
     }
 
     override fun getItemCount() = names.size
