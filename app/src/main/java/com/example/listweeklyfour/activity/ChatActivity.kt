@@ -9,12 +9,15 @@ import com.github.javafaker.Faker
 
 
 class ChatActivity : AppCompatActivity() {
+    val data = mutableListOf<String>()
     private var countMessage = 0
     var call = 0
-    val faker = Faker.instance()
+    var countSMS = 0
     private lateinit var binding: ActivityChatBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val count = intent.getIntExtra("count",0)
+        countSMS = count
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initRcV()
@@ -28,21 +31,17 @@ class ChatActivity : AppCompatActivity() {
         val adapter = ChatAdapter(fillList(),user!!)
         rcView.layoutManager = LinearLayoutManager(this@ChatActivity)
         rcView.adapter = adapter
-        rcView.smoothScrollToPosition(0)
     }
 
     private fun fillList(): List<String> {
-        val intent = intent
-        var count = intent.getIntExtra("count",0)
-        val data = mutableListOf<String>()
-        if (count > 10) {
+        if (countSMS > 10) {
             countMessage += 10
             //(0 until countMessage).forEach { i -> data.add(faker.address().country()) }
             (0 until countMessage).forEach { i -> data.add(call++.toString()) }
-            count -= 10
+            countSMS -= 10
         }
         //else (0 until count).forEach { i -> data.add(faker.address().country()) }
-        else (0 until count).forEach { i -> data.add(call++.toString())}
+        else (0 until countSMS).forEach { i -> data.add(call++.toString())}
         return data
     }
 }
