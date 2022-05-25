@@ -16,7 +16,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val count = intent.getIntExtra("count",0)
+        val count = intent.getIntExtra("count", 0)
         countSMS = count
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -26,22 +26,29 @@ class ChatActivity : AppCompatActivity() {
             binding.swipeRefreshLayout.isRefreshing = false
         }
     }
-    private fun initRcV() = with(binding){
+
+    private fun initRcV() = with(binding) {
         val user = intent.getStringExtra("username")
-        val adapter = ChatAdapter(fillList(),user!!)
+        val adapter = ChatAdapter(fillList(), user!!)
         rcView.layoutManager = LinearLayoutManager(this@ChatActivity)
         rcView.adapter = adapter
     }
 
     private fun fillList(): List<String> {
         if (countSMS > 10) {
-            countMessage += 10
+            countMessage = 10
             //(0 until countMessage).forEach { i -> data.add(faker.address().country()) }
             (0 until countMessage).forEach { i -> data.add(call++.toString()) }
             countSMS -= 10
         }
         //else (0 until count).forEach { i -> data.add(faker.address().country()) }
-        else (0 until countSMS).forEach { i -> data.add(call++.toString())}
+        else {
+            if(countSMS == 0) {
+                return data
+            }
+            (0 until countSMS).forEach { i -> data.add(call++.toString()) }
+            countSMS = 0
+        }
         return data
     }
 }

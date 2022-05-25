@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listweeklyfour.R
-import com.example.listweeklyfour.manage.TimeManager
-import com.github.javafaker.Faker
 import java.util.*
 
 class ChatAdapter(private val names: List<String>, private val user: String) : RecyclerView
@@ -27,6 +25,7 @@ class ChatAdapter(private val names: List<String>, private val user: String) : R
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val random = Random()
+        if (holder.message.text == names[position]) return
         if (random.nextInt(2) >= 1) {
             holder.message.text = names[position]
             holder.message.gravity = Gravity.START
